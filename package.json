@@ -1,0 +1,26 @@
+{
+  "name": "itunes-connect-analytics-api",
+  "version": "0.0.1",
+  "description": "API proxy for iTunes Connect's App Analytics, compatible with re:dash's url data source",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js "
+  },
+  "main": "server.js",
+  "bin": "./bin/itunes-connect-analytics-api",
+  "author": "Yamitzky, Mitsuki Ogasahara",
+  "license": "CC-BY-4.0",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "express": "^4.15.2",
+    "itunesconnectanalytics": "^0.3.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/yamitzky/itunes-connect-analytics-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yamitzky/itunes-connect-analytics-api/issues"
+  },
+  "homepage": "https://github.com/yamitzky/itunes-connect-analytics-api#readme"
+}
