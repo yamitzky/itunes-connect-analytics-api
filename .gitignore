@@ -1,3 +1,6 @@
+.envrc
+docker-compose.override.yml
+
 ### https://raw.github.com/github/gitignore/6ea349e0c8b6f671519a371dd78cea3936725654/Node.gitignore
 
 # Logs
