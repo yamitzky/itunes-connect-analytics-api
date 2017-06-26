@@ -14,7 +14,8 @@ const password = program.password || process.env.PASSWORD
 const host = program.host || process.env.HOST || '0.0.0.0'
 const port = program.port || process.env.PORT || 3000
 
-const instance = new itc.Itunes(appleId, password,
+const authorizer = () => {
+  return new itc.Itunes(appleId, password,
   {
     errorCallback: (e) => {
       console.log('Error logging in: ' + e);
@@ -23,9 +24,10 @@ const instance = new itc.Itunes(appleId, password,
       console.log('Logged in');
     }
   })
+}
 
 const app = express()
-app.get('/query', handlers.queryHandler(instance))
+app.get('/query', handlers.queryHandler(authorizer))
 app.listen(port, host, () => {
   console.log('Standby...')
 })
