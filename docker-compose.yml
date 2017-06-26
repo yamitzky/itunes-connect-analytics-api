@@ -9,7 +9,5 @@ services:
     environment:
       - APPLE_ID
       - PASSWORD
-      - PORT
-      - HOST
     ports:
       - 3000:3000
