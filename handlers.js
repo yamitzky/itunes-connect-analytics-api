@@ -2,7 +2,6 @@ const itc = require('itunesconnectanalytics')
 
 
 exports.queryHandler = (authorizer) => {
-  let instance = authorizer()
   return (req, res) => {
     const query = JSON.parse(req.query.q)
     const dimension = (query.group || {}).dimension
@@ -13,7 +12,7 @@ exports.queryHandler = (authorizer) => {
 
     const analyticsQuery = itc.AnalyticsQuery[query.type](query.app, restQuery)[timeKey](...query[timeKey])
 
-    instance.request(analyticsQuery, function(error, result) {
+    authorizer().instance.request(analyticsQuery, function(error, result) {
       if (error || !result.results) {
         // TODO: smarter retry
         instance = authorizer()
