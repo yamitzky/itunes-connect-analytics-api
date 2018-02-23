@@ -12,7 +12,7 @@ exports.queryHandler = (authorizer) => {
 
     const analyticsQuery = itc.AnalyticsQuery[query.type](query.app, restQuery)[timeKey](...query[timeKey])
 
-    authorizer().instance.request(analyticsQuery, function(error, result) {
+    authorizer().request(analyticsQuery, function(error, result) {
       if (error || !result.results) {
         // TODO: smarter retry
         instance = authorizer()
