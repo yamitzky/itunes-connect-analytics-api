@@ -1,22 +1,15 @@
 const itc = require('itunesconnectanalytics')
 
 
-exports.queryHandler = (authorizer) => {
-  return (req, res) => {
-    const query = JSON.parse(req.query.q)
-    const dimension = (query.group || {}).dimension
-    const timeKey = query.date ? 'date' : 'time'
-
-    const restQuery = Object.assign({}, query);
-    ['app', 'type', 'date', 'time'].forEach(key => delete restQuery[key])
-
-    const analyticsQuery = itc.AnalyticsQuery[query.type](query.app, restQuery)[timeKey](...query[timeKey])
-
+exports.queryHandler = (authorizer, app, type, time, timetype, measures) => {
+    const timeKey = 'time'
+    const dimension = ({}).dimension
+    const analyticsQuery = itc.AnalyticsQuery[type](app, {'measures':measures, 'frequency': itc.frequency.months})[timeKey](time,timetype)
     authorizer().request(analyticsQuery, function(error, result) {
       if (error || !result.results) {
         // TODO: smarter retry
         instance = authorizer()
-        res.send(result)
+        console.log(result)
       } else {
         const data = {}
         result.results.forEach((groupResult) => {
@@ -51,12 +44,10 @@ exports.queryHandler = (authorizer) => {
             type: type,
           }
         })
-
-        res.send({
-          rows: rows,
-          columns: columns,
+        const modifiedrows = JSON.stringify(rows)
+        console.log({
+          'rows':modifiedrows
         })
       }
     })
-  }
 }

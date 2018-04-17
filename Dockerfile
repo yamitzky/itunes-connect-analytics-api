@@ -8,4 +8,4 @@ COPY package-lock.json /usr/src/app/
 RUN npm install
 COPY . /usr/src/app
 
-CMD [ "./bin/itunes-connect-analytics-api" ]
+ENTRYPOINT [ "./bin/itunes-connect-analytics-api" ]
