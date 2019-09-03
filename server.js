@@ -28,6 +28,9 @@ const authorizer = () => {
 
 const app = express()
 app.get('/query', handlers.queryHandler(authorizer))
+app.get('/', (req, res) => {
+  res.send({health: 'ok'})
+})
 app.listen(port, host, () => {
   console.log('Standby...')
 })
